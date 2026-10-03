@@ -24,7 +24,9 @@ Bu bilgilerin dışına çıkma, fiyatları uydurma.
 
 # --- 3. META'NIN WEBHOOK DOĞRULAMASI İÇİN ---
 @app.route('/webhook', methods=['GET'])
+@app.route('/webhook/', methods=['GET'])
 def verify_webhook():
+
     mode = request.args.get('hub.mode')
     token = request.args.get('hub.verify_token')
     challenge = request.args.get('hub.challenge')
@@ -35,7 +37,9 @@ def verify_webhook():
 
 # --- 4. WHATSAPP'TAN MESAJ GELDİĞİNDE ÇALIŞACAK KISIM ---
 @app.route('/webhook', methods=['POST'])
+@app.route('/webhook/', methods=['POST'])
 def receive_message():
+
     data = request.json
     try:
         if 'messages' in data['entry'][0]['changes'][0]['value']:
